@@ -51,9 +51,11 @@ Solo necesitás tener instalado:
 
 ### 1. Descargar el archivo ZIP del repositorio o clonarlo desde la ruta en Github
 
+En caso se use macOS, usar la carpeta _MACOSX. Caso contrario, acceder directamente a la carpeta Proyecto.
+
 ```bash
 git clone https://github.com/jhonatancamasca/Henry_rag_class.git
-cd Henry_rag_class
+cd Henry_rag_class/Proyecto
 ```
 
 ### 2. Después de ubicarse en la carpeta, levantar todos los servicios
