@@ -1,10 +1,9 @@
-##########################################
-###### RAG con Texto — 100% Local   ######
-###### Ollama + pgvector + Jupyter  ######
-##########################################
 
-## ¿Que encontrarás en este repositorio?
-Un sistema de preguntas y respuestas sobre documentos PDF que corre completamente en tu máquina. Sin API keys, sin costos por token.
+# RAG con Texto — 100% Local   
+# Ollama + pgvector + Jupyter  
+
+## RAG con Texto — 100% Local
+Este repositorio contiene un sistema de Generación Aumentada por Recuperación (RAG) que corre completamente en tu máquina.  Despliega un sistema de preguntas y respuestas sobre documentos PDF que corre completamente en tu máquina. Sin API keys, sin costos por token.
 
 ## ¿Qué hace?
 
