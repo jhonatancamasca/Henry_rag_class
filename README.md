@@ -43,7 +43,7 @@ Solo necesitás tener instalado:
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/): Para mayor detalle de la instalación, consultar con la documentación de Docker https://docs.docker.com/desktop/
 
-> No es necesario instalar Jupyter, PostgreSQL ni Ollama localmente. Todo corre dentro de contenedores aisladoss.
+> No es necesario instalar Jupyter, PostgreSQL ni Ollama localmente. Todo corre dentro de contenedores aislados.
 
 ---
 
