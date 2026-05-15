@@ -1,9 +1,9 @@
 
-# RAG con Texto — 100% Local   
-# Ollama + pgvector + Jupyter  
+# RAG con Texto — 100% Local (Ollama + pgvector + Jupyter ) 
 
-## RAG con Texto — 100% Local
-Este repositorio contiene un sistema de Generación Aumentada por Recuperación (RAG) que corre completamente en tu máquina.  Despliega un sistema de preguntas y respuestas sobre documentos PDF que corre completamente en tu máquina. Sin API keys, sin costos por token.
+---
+
+### Este repositorio contiene un sistema de Generación Aumentada por Recuperación (RAG) que corre completamente en tu máquina.  Despliega un sistema de preguntas y respuestas sobre documentos PDF que corre completamente en tu máquina. Sin API keys, sin costos por token.
 
 ## ¿Qué hace?
 
@@ -26,12 +26,14 @@ Pregunta  →  nomic-embed-text  →  pgvector (<=>)  →  top-K chunks  →  ll
 
 ## Stack 
 
+Para que este sistema funcione, combinamos cuatro pilares fundamentales de la ingeniería de datos e IA:
+
 | Componente | Herramienta |
 |---|---|
-| Embedding | `nomic-embed-text` via Ollama |
-| Generación | `llama3.2:1b` via Ollama (optimizado para CPU) |
-| Vector store | PostgreSQL + pgvector (Docker) |
-| Notebook | Jupyter (Docker) |
+| Embedding | `nomic-embed-text` via Ollama | El motor que transforma texto legible en vectores que representan conceptos semántico
+| Generación | `llama3.2:1b` via Ollama (optimizado para CPU) | versión extremadamente rápida sin sacrificar coherencia en tareas de RAG
+| Vector store | PostgreSQL + pgvector (Docker) |  No se limita a buscar palabras exactas, pgvector permite realizar búsquedas por "similitud" matemática
+| Notebook | Jupyter (Docker) | El Orquestador que garantiza que el entorno sea idéntico para todos
 
 ---
 
@@ -47,14 +49,14 @@ Solo necesitás tener instalado:
 
 ## Instalación y uso
 
-### 1. Descargar el archivo ZIP del repositorio y descomprimirlo. 
-### Desde VSCODE apuntar a la ruta de la carpeta
+### 1. Descargar el archivo ZIP del repositorio o clonarlo desde la ruta en Github
 
 ```bash
-cd .../Proyecto
+git clone https://github.com/jhonatancamasca/Henry_rag_class.git
+cd Henry_rag_class
 ```
 
-### 3. Levantar todos los servicios
+### 2. Después de ubicarse en la carpeta, levantar todos los servicios
 
 ```bash
 docker compose up --build
@@ -67,7 +69,8 @@ El comando 'compose up' levanta tres servicios automáticamente:
 
 > La primera vez tarda unos minutos mientras se descargan los modelos (~1.5 GB en total). Las siguientes veces arranca en segundos.
 
-### 4. Cuando todos los modelos estén listos, abrir el siguiente enlace en un navegador para acceder a Jupyter
+### 3. Acceder a la clase
+Cuando todos los modelos estén listos, abre en tu navegador para acceder a Jupyter
 
 ```
 http://localhost:8888
@@ -95,6 +98,8 @@ http://localhost:8888
 
 ## Variables de entorno
 
+Estos son los serviciones que llama Docker según su nombre de red
+
 | Variable | Descripción | Default |
 |---|---|---|
 | `DB_HOST` | Host de PostgreSQL | `localhost` |
@@ -107,7 +112,7 @@ http://localhost:8888
 
 ---
 
-## Comandos útiles
+## Otros comandos útiles
 
 ```bash
 # Levantar en background
