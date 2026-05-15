@@ -1,0 +1,62 @@
+services:
+
+  # ── Base de datos: PostgreSQL + pgvector ─────────────────────
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: pgvector-rag
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER:     ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB:       ${DB_NAME}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── Ollama + descarga automática de modelos ───────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: rag-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+      - ./entrypoint_ollama.sh:/entrypoint_ollama.sh
+    entrypoint: ["/bin/bash", "/entrypoint_ollama.sh"]
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list | grep -q 'nomic-embed-text' || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+      start_period: 120s
+
+  # ── Jupyter Notebook ─────────────────────────────────────────
+  jupyter:
+    build: .
+    container_name: rag-jupyter
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_HOST: db
+      OLLAMA_HOST: http://ollama:11434
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  ollama_models:

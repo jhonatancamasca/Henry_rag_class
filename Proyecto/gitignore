@@ -1,0 +1,10 @@
+# Secretos — NUNCA commitear
+.env
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Docker
+pgdata/
